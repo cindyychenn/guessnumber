@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title> cindy's blog | game </title>
+	</head>
+<body>
+<h1> Guess the number game:</h1>
+<h3>Guess a number between 1 and 200 </h3>
+<h3> You only have ten tries! </h3>
+<input type="text" value=""></input>
+<button>Guess</button>
+<h4 id="times">Number of times guessed 0</h4>
+<h4 id="history">Numbers guessed:</h4>
+<h3 id="result"></h3>
+<script>
+	var number = Math.floor(Math.random() * 199 ) + 1;
+	var count = 0;
+	var resultElm = document.querySelector("#result");
+	function check() {
+		count = count + 1;
+		if (count > 10){
+			resultElm.innerHTML = "Good try, game over. Refresh the page to start again."
+			resultElm.style.color = "red";
+			return;
+		}
+		document.querySelector("#times").innerHTML = "Number of times guessed " + count;
+		var guessed = document.querySelector("input").value;
+
+		var history = document.querySelector("#history");
+		var currentHistory = history.innerText;
+		if (count ==  1) {
+			history.innerHTML = currentHistory + guessed;
+		} else {
+			history.innerHTML = currentHistory + ", " + guessed;
+		}
+		if (guessed > number){
+			resultElm.innerHTML = "Too high";
+			resultElm.style.color = "blue";
+		} else if (guessed < number){
+			resultElm.innerHTML = "Too low";
+			resultElm.style.color = "blue";
+		} else {
+			resultElm.innerHTML = "You found it!";
+			resultElm.style.color = "green";
+		}
+	}
+	document.querySelector("button").onclick = check;
+</script>
+</body>
+</html>
